@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 import 'package:qrreader/src/pages/directions_page.dart';
 import 'package:qrreader/src/pages/maps_page.dart';
@@ -31,9 +32,31 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {},
+        onPressed: _scanQR,
       ),
     );
+  }
+
+  _scanQR() async {
+
+    // https://fernando-herrera.com/
+    // geo:19.24746239468022,-103.72395887812503
+
+    dynamic futureString;
+
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
+
+    print('*********************************************************');
+    print('Future String: ${futureString.rawContent}');
+    print('*********************************************************');
+
+    if (futureString != null) {
+      print('We have information');
+    }
   }
 
 

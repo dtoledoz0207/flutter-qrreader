@@ -42,9 +42,9 @@ class _HomePageState extends State<HomePage> {
     // https://fernando-herrera.com/
     // geo:19.24746239468022,-103.72395887812503
 
-    dynamic futureString;
+    dynamic futureString = "";
 
-    try {
+    /* try {
       futureString = await BarcodeScanner.scan();
     } catch (e) {
       futureString = e.toString();
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
 
     if (futureString != null) {
       print('We have information');
-    }
+    } */
   }
 
 

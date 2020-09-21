@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:qrreader/src/models/scan_model.dart';
+
+import 'package:qrreader/src/providers/db_provider.dart';
 
 import 'package:qrreader/src/pages/directions_page.dart';
 import 'package:qrreader/src/pages/maps_page.dart';
@@ -42,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     // https://fernando-herrera.com/
     // geo:19.24746239468022,-103.72395887812503
 
-    dynamic futureString = "";
+    dynamic futureString = "https://fernando-herrera.com/";
 
     /* try {
       futureString = await BarcodeScanner.scan();
@@ -54,9 +57,12 @@ class _HomePageState extends State<HomePage> {
     print('Future String: ${futureString.rawContent}');
     print('*********************************************************');
 
+    */
+
     if (futureString != null) {
-      print('We have information');
-    } */
+      final scan = ScanModel(value: futureString);
+      DBProvider.db.newScan(scan);
+    }
   }
 
 

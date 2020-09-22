@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:qrreader/src/models/scan_model.dart';
 import 'package:qrreader/src/bloc/scans_bloc.dart';
+import 'package:qrreader/src/utils/utils.dart' as utils;
 
 class MapsPage extends StatelessWidget {
 
@@ -37,6 +38,9 @@ class MapsPage extends StatelessWidget {
                   title: Text(scans[i].value),
                   subtitle: Text('ID: ${scans[i].id}'),
                   trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey),
+                  onTap: () {
+                    utils.openScan(scans[i]);
+                  },
                 )
               )
             );

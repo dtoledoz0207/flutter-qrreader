@@ -30,7 +30,7 @@ class MapPage extends StatelessWidget {
     return FlutterMap(
       options: MapOptions(
         center: scan.getLatLng(),
-        zoom: 10.0
+        zoom: 15.0
       ),
       layers: [
         _createMap()
@@ -39,6 +39,7 @@ class MapPage extends StatelessWidget {
   }
 
   _createMap() {
+    // streets-v11, dark-v10, light-v10, outdoors-v11, satellite-v9, satellite-streets-v11
     return TileLayerOptions(
       urlTemplate: 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
       additionalOptions: {

@@ -28,6 +28,7 @@ class MapPage extends StatelessWidget {
       body: Center(
         child: _createFlutterMap(scan)
       ),
+      floatingActionButton: _createFloatingActionButton(context),
     );
   }
 
@@ -68,6 +69,14 @@ class MapPage extends StatelessWidget {
           )
         )
       ]
+    );
+  }
+
+  Widget _createFloatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.repeat),
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: () {}
     );
   }
 }

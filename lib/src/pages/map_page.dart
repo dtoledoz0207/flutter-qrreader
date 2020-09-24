@@ -33,7 +33,8 @@ class MapPage extends StatelessWidget {
         zoom: 15.0
       ),
       layers: [
-        _createMap()
+        _createMap(),
+        _createMarks(scan)
       ],
     );
   }
@@ -46,6 +47,21 @@ class MapPage extends StatelessWidget {
         'accessToken':'pk.eyJ1IjoiZHRvbGVkb3oiLCJhIjoiY2tmZmwwbmFxMDB1ZjJzb3ZhdmtvandtbCJ9.CjwlVoy9uQIx9hQY9DL9FA',
         'id': 'mapbox/streets-v11'
       }
+    );
+  }
+
+  _createMarks(ScanModel scan) {
+    return MarkerLayerOptions(
+      markers: <Marker> [
+        Marker(
+          width: 100.0,
+          height: 100.0,
+          point: scan.getLatLng(),
+          builder: (context) => Container(
+            child: Icon(Icons.location_on, size: 50.0, color: Theme.of(context).primaryColor),
+          )
+        )
+      ]
     );
   }
 }

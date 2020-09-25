@@ -49,26 +49,18 @@ class _HomePageState extends State<HomePage> {
     // https://fernando-herrera.com/
     // geo:19.24746239468022,-103.72395887812503
 
-    dynamic futureString = "https://fernando-herrera.com/";
+    dynamic futureString;
 
-    /* try {
+     try {
       futureString = await BarcodeScanner.scan();
     } catch (e) {
       futureString = e.toString();
     }
 
-    print('*********************************************************');
-    print('Future String: ${futureString.rawContent}');
-    print('*********************************************************');
+    if (futureString.rawContent != '') {
 
-    */
-
-    if (futureString != null) {
-      final scan = ScanModel(value: futureString);
+      final scan = ScanModel(value: futureString.rawContent);
       scansBloc.addNewScan(scan);
-
-      /*final scan2 = ScanModel(value: 'geo:19.24746239468022,-103.72395887812503');
-      scansBloc.addNewScan(scan2);*/
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), (){
@@ -77,6 +69,9 @@ class _HomePageState extends State<HomePage> {
       } else {
         utils.openScan(context, scan);
       }
+      
+    } else {
+      print('################################## ANY WAS SCNAED ###############################');
     }
   }
 

@@ -36,11 +36,11 @@ class _HomePageState extends State<HomePage> {
       body: _callPage(currentIndexPage),
       bottomNavigationBar: _createBottomNavigationBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Builder(builder: (context) => FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () => _scanQR(context),
-      ),
+      )),
     );
   }
 
@@ -57,22 +57,40 @@ class _HomePageState extends State<HomePage> {
       futureString = e.toString();
     }
 
-    if (futureString.rawContent != '') {
+    if (futureString != null) {
+      if (futureString.rawContent != '') {
 
-      final scan = ScanModel(value: futureString.rawContent);
-      scansBloc.addNewScan(scan);
+        final scan = ScanModel(value: futureString.rawContent);
+        scansBloc.addNewScan(scan);
 
-      if (Platform.isIOS) {
-        Future.delayed(Duration(milliseconds: 750), (){
+        if (Platform.isIOS) {
+          Future.delayed(Duration(milliseconds: 750), (){
+            utils.openScan(context, scan);
+          });
+        } else {
           utils.openScan(context, scan);
-        });
+        }
+        
       } else {
-        utils.openScan(context, scan);
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Nothing was scaned!'),
+            backgroundColor: Theme.of(context).primaryColor,
+            duration: Duration(seconds: 2),
+          )
+        );
       }
-      
+
     } else {
-      print('################################## ANY WAS SCNAED ###############################');
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('ERROR!'),
+          backgroundColor: Colors.redAccent,
+          duration: Duration(seconds: 3),
+        )
+      );
     }
+
   }
 
 
